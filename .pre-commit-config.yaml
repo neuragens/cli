@@ -1,0 +1,32 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+default_language_version:
+    python: python3.11
+repos:
+-   repo: git@github.com:pre-commit/pre-commit-hooks.git
+    rev: v5.0.0
+    hooks:
+    -   id: check-added-large-files
+    -   id: check-toml
+    -   id: check-yaml
+        args:
+        -   --unsafe
+    -   id: end-of-file-fixer
+    -   id: trailing-whitespace
+-   repo: git@github.com:astral-sh/ruff-pre-commit.git
+    rev: v0.6.9
+    hooks:
+    -   id: ruff
+        args:
+        - --fix
+    -   id: ruff-format
+-   repo: git@github.com:pre-commit/mirrors-isort.git
+    rev: v5.10.1
+    hooks:
+    -   id: isort
+        args:
+        - --profile
+        - black
+ci:
+    autofix_commit_msg: 🎨 [pre-commit.ci] Auto format from pre-commit.com hooks
+    autoupdate_commit_msg: ⬆ [pre-commit.ci] pre-commit autoupdate

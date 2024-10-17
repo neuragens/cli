@@ -1,3 +1,8 @@
+# Remove Poetry.lock
+poetry.lock
+
+.pypirc
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
