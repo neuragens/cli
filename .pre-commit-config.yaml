@@ -1,5 +1,5 @@
 # See https://pre-commit.com for more information
-# See https://pre-commit.com/hooks.html for more hookss
+# See https://pre-commit.com/hooks.html for more hooks
 default_language_version:
     python: python3.11
 repos:
@@ -20,6 +20,13 @@ repos:
         args:
         - --fix
     -   id: ruff-format
+-   repo: git@github.com:pre-commit/mirrors-isort.git
+    rev: v5.10.1
+    hooks:
+    -   id: isort
+        args:
+        - --profile
+        - black
 ci:
     autofix_commit_msg: 🎨 [pre-commit.ci] Auto format from pre-commit.com hooks
     autoupdate_commit_msg: ⬆ [pre-commit.ci] pre-commit autoupdate
