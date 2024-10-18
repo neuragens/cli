@@ -30,7 +30,36 @@ jobs:
       run: |
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.10", "3.11", "3.12"]
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install flake8 pytest click>=8.1.7 click-aliases>=1.0.4 pytest-cov setuptools
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Test with pytest
       run: |
         export PYTHONPATH=$(pwd)  # Adiciona o diretório atual ao PYTHONPATH
         pytest tests
+    - name: Create Pull Request
+      if: success()  # Cria o pull request somente se os testes forem bem-sucedidos
+      run: |
+        git config --local user.name "neuragens-actions"
+        git config --local user.email "neuragens-actions@neuragens.com"
+        git checkout -b "auto-pr-branch"
+        git push origin "auto-pr-branch"
+        gh pr create --base main --head auto-pr-branch --title "Automated Pull Request" --body "📦This pull request is created automatically by NeuraGens Actions. 📦"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
