@@ -10,6 +10,9 @@ authors = [
 requires-python = ">=3.7"
 keywords = ["cli", "neuragens", "command-line", "scaffold"]
 
+[tool.coverage.run]
+omit = ["tests/*", "*/.local/*", "/usr/*", "*.pyc"]
+
 [project.optional-dependencies]
 all = [
     "click>=8.1.7",
@@ -17,7 +20,7 @@ all = [
     "pydantic>=1.7.4,!=1.8,!=1.8.1,!=2.0.0,!=2.0.1,!=2.1.0,<3.0.0",
     "click-aliases>=1.0.4",
 ]
-tests = ["pytest"]
+tests = ["pytest", "coverage", "pytest-cov"]
 docs = ["sphinx"]
 
 [project.urls]
@@ -25,7 +28,7 @@ docs = ["sphinx"]
 
 
 [project.scripts]
-neuragen = "cli.cli:cli"
+neuragens = "cli.cli:cli"
 
 [build-system]
 requires = ["setuptools", "wheel"]

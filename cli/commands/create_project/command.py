@@ -1,3 +1,5 @@
+import os
+
 import click
 
 
@@ -10,3 +12,5 @@ class CreateProjectCommand:
     def command(path):
         """Creates a new NeuraGens workspace."""
         click.echo("Download the application...")
+        os.makedirs(path, exist_ok=True)
+        click.echo(f"Neuragens app create successful in {path}")
