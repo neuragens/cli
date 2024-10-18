@@ -29,7 +29,7 @@ jobs:
     - name: Lint with flake8
       run: |
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+        flake8 . --count --exit-zero --max-complexidade=10 --max-line-length=127 --statistics
 
   test:
     runs-on: ubuntu-latest
@@ -53,13 +53,23 @@ jobs:
       run: |
         export PYTHONPATH=$(pwd)  # Adiciona o diretório atual ao PYTHONPATH
         pytest tests
-    - name: Create Pull Request
-      if: success()  # Cria o pull request somente se os testes forem bem-sucedidos
+
+  create_pr:
+    runs-on: ubuntu-latest
+    needs: test
+    if: success()
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Git configuration
       run: |
         git config --local user.name "neuragens-actions"
         git config --local user.email "neuragens-actions@neuragens.com"
+    - name: Create and push branch
+      run: |
         git checkout -b "auto-pr-branch"
-        git push origin "auto-pr-branch"
-        gh pr create --base main --head auto-pr-branch --title "Automated Pull Request" --body "📦This pull request is created automatically by NeuraGens Actions. 📦"
+        git push https://x-access-token:${{ secrets.PAT }}@github.com/neuragens/cli.git "auto-pr-branch"
+    - name: Create Pull Request
+      run: |
+        gh pr create --base main --head auto-pr-branch --title "Automated Pull Request" --body "📦 This pull request is created automatically by NeuraGens Actions. 📦"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
