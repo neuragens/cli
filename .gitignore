@@ -1,6 +1,7 @@
 # Remove Poetry.lock
 poetry.lock
 
+.ruff_cache
 .pypirc
 
 # Byte-compiled / optimized / DLL files

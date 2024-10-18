@@ -1,0 +1,10 @@
+graft cli
+graft tests
+
+include README.md
+include LICENSE.txt
+
+graft .github
+
+global-exclude __pycache__ *.py[cod]
+global-exclude .DS_Store
