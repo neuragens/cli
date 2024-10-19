@@ -57,17 +57,15 @@ jobs:
   create_pr:
     runs-on: ubuntu-latest
     needs: test
-    if: success()  # Executa apenas se os testes forem bem-sucedidos
+    if: success()
     steps:
     - uses: actions/checkout@v4
-    - name: Set up Git configuration
-      run: |
-        git config --local user.name "neuragens-actions"
-        git config --local user.email "neuragens-actions@neuragens.com"
-    - name: Create Pull Request
-      run: |
-        CURRENT_BRANCH=$(echo "${GITHUB_REF##*/}")  # Extrai o nome da branch atual
-        git push origin HEAD:refs/heads/$CURRENT_BRANCH  # Faz push para a branch atual
-        gh pr create --base main --head $CURRENT_BRANCH --title "Automated Pull Request" --body "📦 This pull request is created automatically by NeuraGens Actions. 📦"
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Usando GITHUB_TOKEN
+    - name: Create pull request
+      id: open-pr
+      uses: repo-sync/pull-request@v2
+      with:
+        destination_branch: "main"
+        pr_title: "feat: 📦 This pull request is created automatically by NeuraGens Actions. 📦"
+        pr_template: ".github/PULL_REQUEST_TEMPLATE.md"
+        pr_reviewer: "michaeldouglas"
+        pr_draft: true
