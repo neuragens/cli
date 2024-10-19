@@ -51,4 +51,4 @@ jobs:
           labels: enhancement
           title: "Automated Pull Request - [${{ github.ref }}]"
           body: "📦 This pull request is created automatically by NeuraGens Actions. 📦"
-          body-path: ${{ github.workspace }}/.github/docs/check.md
+          body-path: ${{ github.workspace }}/../.github/docs/check.md
