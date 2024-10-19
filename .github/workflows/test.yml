@@ -42,11 +42,6 @@ jobs:
         with:
           fetch-depth: 0
 
-
-      - name: Print Current Directory
-        run: |
-          echo "Current directory is: $(pwd)"
-          ls -la ${{ github.workspace }}/.github/workflows
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
         with:
@@ -56,4 +51,4 @@ jobs:
           labels: enhancement
           title: "Automated Pull Request - [${{ github.ref }}]"
           body: "📦 This pull request is created automatically by NeuraGens Actions. 📦"
-          body-path: ${{ github.workspace }}/.github/docs/check.md
+          body-path: ${{ github.workspace }}/.github/workflows/docs/check.md
