@@ -60,12 +60,11 @@ jobs:
     if: success()
     steps:
     - uses: actions/checkout@v4
-    - name: Create pull request
-      id: open-pr
-      uses: repo-sync/pull-request@v2
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v7
       with:
-        destination_branch: "main"
-        pr_title: "feat: 📦 This pull request is created automatically by NeuraGens Actions. 📦"
-        pr_template: ".github/PULL_REQUEST_TEMPLATE.md"
-        pr_reviewer: "michaeldouglas"
-        pr_draft: true
+        branch: ${{ github.ref }}
+        base: main
+        title: "Automated Pull Request"
+        body: "📦 This pull request is created automatically by NeuraGens Actions. 📦"
+        token: ${{ secrets.GITHUB_TOKEN }}
