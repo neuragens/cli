@@ -2,11 +2,11 @@ name: Python NeuraGens CLI
 
 on:
   push:
-    branches: 
+    branches:
       - "*"
       - "!main"
   pull_request:
-    branches: 
+    branches:
       - "*"
       - "!main"
 
@@ -73,7 +73,8 @@ jobs:
       uses: peter-evans/create-pull-request@v7
       with:
         token: ${{ secrets.neuragens }}
-        base: main 
+        base: main
         branch: ${{ github.ref }}
+        labels: enhancement
         title: "Automated Pull Request"
         body: "📦 This pull request is created automatically by NeuraGens Actions. 📦"
