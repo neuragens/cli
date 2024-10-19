@@ -66,7 +66,7 @@ jobs:
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v7
       with:
-        token: ${{ secrets.YOUR_PERSONAL_ACCESS_TOKEN }}
+        token: ${{ secrets.NEURAGENS_TOKEN }}
         branch: ${{ github.ref }}
         base: main
         title: "Automated Pull Request"
