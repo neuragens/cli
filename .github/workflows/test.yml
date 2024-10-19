@@ -50,5 +50,5 @@ jobs:
           base: main
           branch: ${{ github.ref }}
           labels: enhancement
-          title: "Automated Pull Request"
+          title: "Automated Pull Request - [REF][${{ github.ref }}]"
           body: "📦 This pull request is created automatically by NeuraGens Actions. 📦"
