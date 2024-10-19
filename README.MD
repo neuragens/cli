@@ -8,4 +8,4 @@ NeuraGens applications directly from a command shell.
 Get started with NeuraGens CLI, learn the fundamentals and explore advanced topics on our documentation website.
 
 
-Love NeuraGEns CLI? Give our repo a star ⭐ ⬆️ ⬆️.
+Love NeuraGEns CLI? Give our repo a star ⭐ ⬆️.
