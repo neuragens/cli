@@ -66,8 +66,8 @@ jobs:
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v7
       with:
+        token:  ${{ secrets.MY_PERSONAL_ACCESS_TOKEN }}
         branch: ${{ github.ref }}
         base: main
         title: "Automated Pull Request"
         body: "📦 This pull request is created automatically by NeuraGens Actions. 📦"
-        token: ${{ secrets.MY_PERSONAL_ACCESS_TOKEN }}
