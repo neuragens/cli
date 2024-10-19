@@ -34,4 +34,4 @@ jobs:
       - name: Test NeuraGens CLI
         run: |
           pip install -e ".[all]"
-          neuragens version
+          neuragens versionssa
