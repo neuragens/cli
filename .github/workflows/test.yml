@@ -46,7 +46,7 @@ jobs:
       - name: Print Current Directory
         run: |
           echo "Current directory is: $(pwd)"
-          ls -la $(pwd)/.github/docs
+          ls -la $(pwd)/../.github/docs
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
         with:
