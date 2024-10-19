@@ -70,4 +70,4 @@ jobs:
         base: main
         title: "Automated Pull Request"
         body: "📦 This pull request is created automatically by NeuraGens Actions. 📦"
-        token: ${{ secrets.neuragens }}
+        token: ${{ secrets.MY_PERSONAL_ACCESS_TOKEN }}
