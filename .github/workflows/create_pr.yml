@@ -1,0 +1,28 @@
+name: Create Pull Request
+
+on:
+  workflow_run:
+    workflows: ["Run Tests"]
+    types:
+      - completed
+
+jobs:
+  create_pr:
+    runs-on: ubuntu-latest
+    needs: test
+    if: success()
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.neuragens }}
+          base: main
+          branch: ${{ github.ref }}
+          labels: enhancement
+          title: "Automated Pull Request"
+          body: "📦 This pull request is created automatically by NeuraGens Actions. 📦"
