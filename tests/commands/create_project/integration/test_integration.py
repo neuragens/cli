@@ -16,11 +16,13 @@ def runner():
 def test_create_project_integration(mock_makedirs, runner):
     """Integration test for the create_project command"""
 
-    result = runner.invoke(cli, ["create-project", "--path", "/tmp/project"])
+    result = runner.invoke(
+        cli, ["new", "--path", "/tmp/project", "--name", "test-project"]
+    )
 
     assert result.exit_code == 0
     assert "Download the application..." in result.output
 
-    mock_makedirs.assert_called_once_with("/tmp/project", exist_ok=True)
+    mock_makedirs.assert_called_once_with("/tmp/project/test-project", exist_ok=True)
 
-    assert not os.path.exists("/tmp/project")
+    assert not os.path.exists("/tmp/project/test-project")
